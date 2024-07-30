@@ -1,4 +1,4 @@
-let blog = [];
+//let blog = [];
 
 const {MongoClient, ObjectId} = require('mongodb');
 const {MONGO_URI} = require("../emv");
