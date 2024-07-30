@@ -20,8 +20,8 @@ const allBlogs = (req, res) => {
 const BlogById =  (req, res) => {
     let { blogId } = req.params;
     console.log(blogId);
-    blogId -= 1;
     if (blogId > 0 && blogId <= blog.length) {
+      blogId -= 1;
       const blogToReturn = blog[blogId];
       return res.status(200).json(blogToReturn).send();
     }
@@ -31,11 +31,12 @@ const BlogById =  (req, res) => {
 
 const UpdateBlog = (req,res)=>{
     const {author , content}=req.body;
-    const {blogId}=req.params;
-    if(blogId>0 && blogId<=blog.length){
+    let {blogId}=req.params;
+    console.log(blogId);
+    if(blogId>0 && blogId<=blog.length && author && content){ 
       blogId-=1;
-      if(author) blog[blogId].author = author;
-      if(content) blog[blogId].content = content;
+      blog[blogId] = {author, content};
+      console.log(blog[blogId]);
       return res.status(200).send();
     }
       return res.status(400).send();
@@ -43,8 +44,8 @@ const UpdateBlog = (req,res)=>{
 
 const patchBlog = (req,res)=>{
     const {author , content}=req.body;
-    const {blogId}=req.params;
-    if(blogId>0 && blogId<=blog.length){
+    let {blogId}=req.params;
+    if(blogId>0 && blogId<=blog.length && author && content){
       blogId-=1;
       if(author) blog[blogId].author = author;
       if(content) blog[blogId].content = content;
