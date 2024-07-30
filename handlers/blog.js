@@ -1,67 +1,120 @@
 let blog = [];
 
-const createBlog = (req, res) => {
-    // console.log(req.body);
+const {MongoClient, ObjectId} = require('mongodb');
+const {MONGO_URI} = require("../emv");
+const {BLOG_DB,BLOG_COL} = require("../constant");
+
+
+const createBlog = async (req, res) => {
     const { body } = req;
     const { author, content } = body;
-  
-    if (author && content) {
-      blog.push({ author, content });
-      res.status(201).send("OK");
-      return;
+    const client = new MongoClient(MONGO_URI);
+    try{
+      const  blogDb = client.db(BLOG_DB)
+      const blogs = blogDb.collection(BLOG_COL)
+      const result = await blogs.insertOne({author,content})
+      console.log(`inserted ${{author,content}} into blogs , with _id: ${result.insertedId}`);
     }
-    res.status(400).send("!OK");
+    catch(err){
+        res.status(500).send("Internal Server Error");
+    }
+    finally{
+        await client.close();
+    }
+    res.status(200).send("OK");
 };
 
-const allBlogs = (req, res) => {
-    res.status(200).json(blog).send();
+const allBlogs = async (req, res) => {
+    const client = new MongoClient(MONGO_URI);
+    try{
+      const blogDb = client.db(BLOG_DB);
+      const blogs = blogDb.collection(BLOG_COL);
+      const cursor = await blogs.find({})
+      const result= await cursor.toArray()
+      res.status(200).json(result).send();
+    }
+  catch(err){
+      res.status(500).send("Internal Server Error");
+  }
+  finally{
+      await client.close();
+  }
 };
 
-const BlogById =  (req, res) => {
-    let { blogId } = req.params;
+const BlogById = async (req, res) => {;
+  let {blogId} = req.params;
+  const client = new MongoClient(MONGO_URI);
+  try{
+    blogId = new ObjectId(blogId);
     console.log(blogId);
-    if (blogId > 0 && blogId <= blog.length) {
-      blogId -= 1;
-      const blogToReturn = blog[blogId];
-      return res.status(200).json(blogToReturn).send();
-    }
-    //res.json(blog).send();
-    res.status(404).send();
+    const blogDb = client.db(BLOG_DB);
+    const blogs = blogDb.collection(BLOG_COL);
+    const result = await blogs.findOne({ _id:blogId})
+    res.status(200).json(result).send();
+  }
+catch(err){
+  res.status(500).send("Internal Server Error");
+}
+finally{
+    await client.close();
+}
+
 };
 
-const UpdateBlog = (req,res)=>{
-    const {author , content}=req.body;
-    let {blogId}=req.params;
-    console.log(blogId);
-    if(blogId>0 && blogId<=blog.length && author && content){ 
-      blogId-=1;
-      blog[blogId] = {author, content};
-      console.log(blog[blogId]);
-      return res.status(200).send();
-    }
-      return res.status(400).send();
+const UpdateBlog = async (req,res)=>{
+  const {author ,  content } = req.body;
+  let {blogId} = req.params;
+  const client = new MongoClient(MONGO_URI);
+  try{
+    blogId = new ObjectId(blogId);
+    const blogDb = client.db(BLOG_DB);
+    const blogs = blogDb.collection(BLOG_COL);
+    const result = await blogs.findOneAndUpdate({_id: blogId},{$set:{author,content}},{returnDocument:"after"})
+    res.status(200).json({result, message:"Success"}).send();
+  }catch(err){
+    res.status(500).send("Internal Server Error");
+}
+finally{
+    await client.close();
+}
 };
 
-const patchBlog = (req,res)=>{
-    const {author , content}=req.body;
-    let {blogId}=req.params;
-    if(blogId>0 && blogId<=blog.length && author && content){
-      blogId-=1;
-      if(author) blog[blogId].author = author;
-      if(content) blog[blogId].content = content;
-      return res.status(200).send();
-    }
-      return res.status(400).send();
+const patchBlog =  async (req,res)=>{
+  const {author ,  content } = req.body;
+  let {blogId} = req.params;
+  const client = new MongoClient(MONGO_URI);
+  const updateDoc={}
+  if (author) updateDoc.author = author;
+  if (content) updateDoc.content = content;
+  try{
+    blogId = new ObjectId(blogId);
+    const blogDb = client.db(BLOG_DB);
+    const blogs = blogDb.collection(BLOG_COL);
+    const result = await blogs.findOneAndUpdate({_id: blogId},{$set:updateDoc},{returnDocument:"after"})
+    res.status(200).json({result, message:"Success"}).send();
+  }catch(err){
+    res.status(500).send("Internal Server Error");
+}
+finally{
+    await client.close();
+}
 };
 
- const deleteBlog = (req,res)=>{
-    let {blogId}=req.params;
-    if(blogId>0 && blogId<=blog.length){
-      blogId-=1
-      blog.splice(blogId,1);
-      return res.status(200).send();
-    }
-    return res.status(404).send();
+ const deleteBlog =  async (req,res)=>{
+  let {blogId} = req.params;
+  const client = new MongoClient(MONGO_URI)
+  try{
+    blogId = new ObjectId(blogId);
+    const blogDb = client.db(BLOG_DB);
+    const blogs = blogDb.collection(BLOG_COL);
+   const result = await blogs.deleteOne({_id:blogId});
+    res.status(200).json({result, message:"Success"}).send();
+  }catch(err){
+    res.status(500).send("Internal Server Error");
+}
+finally{
+    await client.close();
+}
 };
 
 module.exports = {
