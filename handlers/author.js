@@ -1,5 +1,5 @@
 const {MongoClient, ObjectId, ReturnDocument} = require("mongodb")
-const {MONGO_URI} = require("../emv")
+const {MONGO_URI} = require("../env")
 const {BLOG_DB,AUTHOR_COL} = require("../constant")
 
 const createAuthor = async (req,res)=>{

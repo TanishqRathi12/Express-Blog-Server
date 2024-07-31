@@ -3,7 +3,7 @@ const { blogRouter } = require("./routers/blog");
 const { authorRouter } = require("./routers/author")
 const { healthRouter } = require("./routers/Heath");
 const { default: mongoose } = require("mongoose");
-const { MONGO_URI } = require("./emv");
+const { MONGO_URI } = require("./env");
 
 
 const port = 8000;
