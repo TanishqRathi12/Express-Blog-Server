@@ -1,27 +1,42 @@
 const {Router} = require("express");
 
+const blogController = require("../controllers/blog.controller")
+
 const blogRouter = Router();
 
-const {
-    createBlog,
-    allBlogs,
-    BlogById,
-    UpdateBlog,
-    patchBlog,
-    deleteBlog
-} = require("../handlers/blog");
+blogRouter.get('/',blogController.blogIndex);
+// blogRouter.get('/new',blogController.blogCreateGet);
+// blogRouter.post('/',blogController.blogCreatePost);
+// blogRouter.get('/:id',blogController.blogDetails);
+// blogRouter.get('/:id/edit',blogController.blogEditGet);
+// blogRouter.put('/:id',blogController.blogEditPut);
+// blogRouter.delete('/:id',blogController.blogDelete);
 
-blogRouter.post("", createBlog);
 
-blogRouter.get("", allBlogs);
+module.exports = {
+    blogRouter
+};
 
-blogRouter.get("/:blogId", BlogById);
+// const {
+//     createBlog,
+//     allBlogs,
+//     BlogById,
+//     UpdateBlog,
+//     patchBlog,
+//     deleteBlog
+// } = require("../handlers/blog");
 
-blogRouter.put("/:blogId", UpdateBlog);    
+// blogRouter.post("", createBlog);
 
-blogRouter.patch("/:blogId", patchBlog);
+// blogRouter.get("", allBlogs);
 
-blogRouter.delete("/:blogId", deleteBlog);
+// blogRouter.get("/:blogId", BlogById);
 
-module.exports = {blogRouter};
+// blogRouter.put("/:blogId", UpdateBlog);
+
+// blogRouter.patch("/:blogId", patchBlog);
+
+// blogRouter.delete("/:blogId", deleteBlog);
+
+
 
