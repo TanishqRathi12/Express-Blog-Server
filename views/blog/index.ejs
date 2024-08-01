@@ -1,6 +1,7 @@
-
+<%- include ('../layout/main', {title: 'Edit Blog' , body:''})  %>
 
 <h2>All Blogs</h2>
+<link rel="stylesheet" href="/css/styles.css">
 <% blogs.forEach(blog => {%>
     <article>
         <h3><a href="/blog/<%= blog._id %>">
