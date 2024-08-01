@@ -1,23 +1,23 @@
-const {Router} = require("express")
+const { Router } = require("express");
 
 const authorRouter = Router();
 
 const {
-    createAuthor,
-    readAllAuthor,
-    authorById,
-    updateAuthor,
-    patchAuthor,
+  createAuthor,
+  readAllAuthor,
+  authorById,
+  updateAuthor,
+  patchAuthor,
 } = require("../handlers/author");
 
-authorRouter.post("",createAuthor); 
+authorRouter.post("", createAuthor);
 
-authorRouter.get("",readAllAuthor);
+authorRouter.get("", readAllAuthor);
 
-authorRouter.get("/:authorId",authorById);
+authorRouter.get("/:authorId", authorById);
 
-authorRouter.put("/:authorId",updateAuthor);
+authorRouter.put("/:authorId", updateAuthor);
 
-authorRouter.patch("/:authorId",patchAuthor)
+authorRouter.patch("/:authorId", patchAuthor);
 
-module.exports = {authorRouter};
+module.exports = { authorRouter };

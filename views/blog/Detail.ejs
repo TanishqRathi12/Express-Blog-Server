@@ -5,7 +5,9 @@
 <p>
     <%= blog.body %>
 </p>
-<a href="/blog/<%= blog._id %>/edit">EDIT</a>
-<form action="/blog/<%= blog._id %>?_method=DELETE" method="post">
-    <button type="submit">DELETE</button>
+<div class="Del-Ed">
+<a  href="/blog/<%= blog._id %>/Update"><Button class="Ed">EDIT</Button></a>
+<form class="Del" action="/blog/<%= blog._id %>?_method=DELETE" method="post">
+    <button>DELETE</button>
 </form>
+</div>

@@ -1,10 +1,10 @@
-const {Router} = require("express");
-const {Health} = require("../handlers/health");
+const { Router } = require("express");
+const { Health } = require("../handlers/health");
 
 const healthRouter = Router();
 
-healthRouter.get("/",Health);
+healthRouter.get("/", Health);
 
 module.exports = {
-    healthRouter
+  healthRouter,
 };
