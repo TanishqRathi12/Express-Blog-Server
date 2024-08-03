@@ -8,5 +8,5 @@ module.exports = {
     MONGO_URI_KEY,
     BLOG_DB,
     BLOG_COL,
-    AUTHOR_COL
+    AUTHOR_COL,
 };
