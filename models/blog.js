@@ -1,6 +1,6 @@
-const { Schema, model } = require("mongoose");
+const { mongoose, model } = require("mongoose");
 
-const blogSchema = new Schema({
+const blogSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -11,8 +11,13 @@ const blogSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
+  author:{
+    type:mongoose.Schema.Types.ObjectId,
+    require:true,
+    ref:"Author",
+  }
 });
 
 const Blog = model("blogs", blogSchema);

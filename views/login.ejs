@@ -3,18 +3,27 @@
 
    <div class="login-container">
         <h1>Login Page</h1>
-        <form action="/login" method="POST">
+        <form action="/auth/login" method="POST">
             <div class="form-group">
                 <label for="user">Username:</label>
                 <input type="text" id="user" name="user" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
             <button type="submit" class="btn">Login</button>
+            <% if(locals.error_msg){ %>
+                <div class="error_msg">
+                    <%= error_msg %>
+                </div>
+            <% } %>
         </form>
         <div class="signup-link">
-            <p>Don't have an account?<a href="/signup">Sign Up</a></p>
+            <p>Don't have an account?<a href="/auth/signup">Sign Up</a></p>
         </div>
     </div>

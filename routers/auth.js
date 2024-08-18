@@ -1,15 +1,39 @@
-// const {Router} = require("express")
+const {Router} = require("express")
+//const { verifyToken } = require("../middleware/authmiddle")
+//const authController = require("../controllers/auth.controller")
+const passport = require("passport")
 
-// const authController = require("../controllers/auth.controller")
-
-// const authRouter = Router();
-
-// authRouter.get("/signup",authController.getSignup);
-// authRouter.post("/signup",authController.postSignup)
-// authRouter.get("/login",authController.getLogin);
-// authRouter.post("/login",authController.postLogin)
+const authRouter = Router();
 
 
-// module.exports ={
-//     authRouter,
-// };
+authRouter.get("/login", (req,res)=>{
+    res.render("login")
+});
+// authRouter.post("/signup",authController.signUp)
+authRouter.post("/login",passport.authenticate('local-login',{
+    successRedirect:"/blog",
+    failureRedirect:"/auth/signup",
+    failureFlash:true,
+})
+);
+
+authRouter.get("/signup",(req,res)=>{
+    res.render("signup");
+})
+
+authRouter.post("/signup",passport.authenticate('local-signup',{
+    successRedirect:"/blog",
+    failureRedirect:"/auth/signup",
+    failureFlash:true,
+})
+);
+
+authRouter.post('/logout',(req,res)=>{
+    req.logout();
+    req.flash('success_msg', 'You are logged out');
+    return res.redirect('/auth/login')
+})
+
+module.exports ={
+    authRouter,
+};
