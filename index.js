@@ -54,6 +54,10 @@ app.use("/",authRouter);
 app.use("/blog", ensureAuth ,blogRouter);
 app.use("/health", healthRouter);
 
+app.use('*', (req, res) => {
+  res.redirect('/login');
+});
+
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).send("Something went wrong");

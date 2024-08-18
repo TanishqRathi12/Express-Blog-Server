@@ -31,7 +31,7 @@ authRouter.post("/signup",passport.authenticate('local-signup',{
 authRouter.post('/logout',(req,res)=>{
     req.logout();
     req.flash('success_msg', 'You are logged out');
-    return res.redirect('/auth/login')
+    return res.redirect('/login')
 })
 
 module.exports ={
