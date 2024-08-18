@@ -50,7 +50,7 @@ app.use(methodOverride("_method"));
 
 //app.use(logger);
 
-app.use("/auth",authRouter);
+app.use("/",authRouter);
 app.use("/blog", ensureAuth ,blogRouter);
 app.use("/health", healthRouter);
 

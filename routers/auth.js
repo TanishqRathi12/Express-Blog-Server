@@ -12,7 +12,7 @@ authRouter.get("/login", (req,res)=>{
 // authRouter.post("/signup",authController.signUp)
 authRouter.post("/login",passport.authenticate('local-login',{
     successRedirect:"/blog",
-    failureRedirect:"/auth/signup",
+    failureRedirect:"/signup",
     failureFlash:true,
 })
 );
@@ -23,7 +23,7 @@ authRouter.get("/signup",(req,res)=>{
 
 authRouter.post("/signup",passport.authenticate('local-signup',{
     successRedirect:"/blog",
-    failureRedirect:"/auth/signup",
+    failureRedirect:"/signup",
     failureFlash:true,
 })
 );
