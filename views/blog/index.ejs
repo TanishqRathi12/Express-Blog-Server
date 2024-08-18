@@ -1,14 +1,35 @@
-<%- include ('../layout/main', {title: 'Blogs' , body:''}) %>
+<%- include('../layout/main', { title: 'Blogs', body: '' }) %>
 
-    <h2>All Blogs</h2>
-    <% blogs.forEach(blog=> {%>
-        <article>
-            <h3><a href="/blog/<%= blog._id %>">
-                    <%= blog?.title %>
-                </a></h3>
-            <p>
-                <%= blog?.body?.substring(0, 100) %>
-            </p>
-            <small>By : <%= blog?.author?.name %></small>
-        </article>
-        <% }) %>
+<h2>All Blogs</h2>
+<% if (success_message || error_message || error) { %>
+  <div class="alerts">
+    <% if (success_message) { %>
+      <div class="alert alert-success">
+        <%= success_message %>
+      </div>
+    <% } %>
+
+    <% if (error_message) { %>
+      <div class="alert alert-danger">
+        <%= error_message %>
+      </div>
+    <% } %>
+
+    <% if (error) { %>
+      <div class="alert alert-warning">
+        <%= error %>
+      </div>
+    <% } %>
+  </div>
+<% } %>
+<% blogs.forEach(blog => { %>
+  <article>
+    <h3><a href="/blog/<%= blog._id %>">
+      <%= blog.title %>
+    </a></h3>
+    <p>
+      <%= blog.body.substring(0, 100) %>...
+    </p>
+    <small>By: <%= blog.author ? blog.author.name : 'Unknown' %></small>
+  </article>
+<% }) %>
