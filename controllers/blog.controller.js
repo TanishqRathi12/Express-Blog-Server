@@ -33,7 +33,7 @@ const blogDetails = (req, res) => {
   const id = req.params.id;
   Blog.findById(id)
     .populate("author", "name")
-    .then((blog) => res.render("blog/detail", { blog }))
+    .then((blog) => res.render("blog/Detail", { blog }))
     .catch((err) => console.log(err));
 };
 
