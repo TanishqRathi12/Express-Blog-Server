@@ -16,23 +16,3 @@ module.exports = {
   blogRouter,
 };
 
-// const {
-//     createBlog,
-//     allBlogs,
-//     BlogById,
-//     UpdateBlog,
-//     patchBlog,
-//     deleteBlog
-// } = require("../handlers/blog");
-
-// blogRouter.post("", createBlog);
-
-// blogRouter.get("", allBlogs);
-
-// blogRouter.get("/:blogId", BlogById);
-
-// blogRouter.put("/:blogId", UpdateBlog);
-
-// blogRouter.patch("/:blogId", patchBlog);
-
-// blogRouter.delete("/:blogId", deleteBlog);

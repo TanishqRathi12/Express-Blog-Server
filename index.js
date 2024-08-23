@@ -1,6 +1,5 @@
 const express = require("express");
 const { blogRouter } = require("./routers/blog");
-const { healthRouter } = require("./routers/Heath");
 const {authRouter} = require("./routers/auth")
 const { mongoose } = require("mongoose")
 const methodOverride = require("method-override");
@@ -52,7 +51,6 @@ app.use(methodOverride("_method"));
 
 app.use("/",authRouter);
 app.use("/blog", ensureAuth ,blogRouter);
-app.use("/health", healthRouter);
 
 app.use('*', (req, res) => {
   res.redirect('/login');
@@ -67,7 +65,7 @@ app.listen(port, () => {
   console.log(`Server running on PORT:${port}`);
   try {
     mongoose.connect(process.env.MONGO_URI);
-    console.log("connected to db");
+    console.log("connected to database");
   } catch (error) {
     console.log(error);
   }

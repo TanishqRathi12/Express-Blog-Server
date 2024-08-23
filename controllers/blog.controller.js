@@ -31,8 +31,8 @@ const blogCreatePost = async (req, res) => {
 
 const blogDetails = (req, res) => {
   const id = req.params.id;
+  
   Blog.findById(id)
-    .populate("author", "name")
     .then((blog) => res.render("blog/Detail", { blog }))
     .catch((err) => console.log(err));
 };
@@ -67,7 +67,6 @@ const blogEditPut = async (req, res) => {
           req.flash("error_msg","Not Authorized");
           res.redirect("/blog")
         }
-        res.redirect("/blog");
       })
       .catch((err) => console.error(err));
   }

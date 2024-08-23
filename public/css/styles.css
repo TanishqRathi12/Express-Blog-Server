@@ -1,28 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f7ff;
+  color: #0615c3;
+  line-height: 1.6;
   margin: 0;
   padding: 0;
 }
 
 header {
-  background-color: #333;
+  background-color: #0077b6;
   color: #fff;
-  padding: 1em 0;
+  padding: 1.5rem 0;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  text-align: center;
 }
 
 nav ul li {
-  display: inline;
+  display: inline-block;
   margin-right: 1em;
 }
 
@@ -30,6 +37,7 @@ nav ul li a {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
+  padding: 0.5em 1em;
 }
 
 nav ul li a:hover {
@@ -37,21 +45,41 @@ nav ul li a:hover {
 }
 
 
-main {
-  margin: 2em auto;
-  max-width: 800px;
-  padding: 1em;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+@media (max-width: 768px) {
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav ul li {
+    margin-bottom: 1rem;
+  }
 }
 
-
 form label {
-  margin:20px;
+  margin: 20px;
   display: block;
   margin-top: 1em;
   font-weight: bold;
+}
+
+#logout {
+  margin: 20px;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #e66465, #9198e5); 
+  color: #fff;
+  border: none;
+  border-radius: 50px; 
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#logout:hover {
+  background: linear-gradient(135deg, #ff5a5f, #5f2c82); 
+  transform: translateY(-2px); 
 }
 
 form input[type="text"],
@@ -66,7 +94,7 @@ form textarea {
 }
 
 form button {
-  margin:20px;
+  margin: 20px;
   margin-top: 1em;
   padding: 0.75em 1.5em;
   background-color: #28a745;
@@ -84,27 +112,28 @@ form button:hover {
 
 
 article {
-  margin-bottom: 1.5em;
+  margin-bottom: 2rem;
   background-color: #f9f9f9;
-  padding: 1.5em;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 article:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 article h3 {
-  margin-top: 0;
-  font-size: 1.75em;
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+  color: #0077b6;
 }
 
 article h3 a {
-  text-decoration: none;
   color: #007bff;
+  text-decoration: none;
   transition: color 0.3s ease;
 }
 
@@ -113,16 +142,16 @@ article h3 a:hover {
 }
 
 article p {
-  font-size: 1.1em;
-  color: #666;
+  font-size: 1.1rem;
+  color: #555;
   line-height: 1.6;
 }
 
 
 h2 {
   text-align: center;
-  font-size: 2.5em;
-  margin-bottom: 1em;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
   color: #333;
 }
 
@@ -131,9 +160,10 @@ h2 {
   text-decoration: none;
   color: white;
   background-color: #007bff;
-  padding: 0.75em 1.5em;
-  border-radius: 0.3em;
-  margin-top: 1em;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  display: inline-block;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -145,17 +175,16 @@ h2 {
 .Del {
   display: flex;
   justify-content: center;
-  margin-top: 1em;
+  margin-top: 1rem;
 }
 
 .Del button {
   background-color: #dc3545;
   border: none;
   color: white;
-  padding: 0.5em 1.5em;
-  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1em;
   transition: background-color 0.3s ease;
 }
 
@@ -166,25 +195,4 @@ h2 {
 
 .hidden {
   display: none;
-}
-
-.alert {
-  padding: 1em;
-  margin-bottom: 1em;
-  border-radius: 4px;
-}
-
-.alert-success {
-  color: #155724;
-
-}
-
-.alert-danger {
-  color: #721c24;
-;
-}
-
-.alert-warning {
-  color: #856404;
-
 }

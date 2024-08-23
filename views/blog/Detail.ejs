@@ -1,11 +1,12 @@
 <%- include('../layout/main',{title:blog.title,body:''}) %>
+
 <h2>
     <%= blog.title %>
 </h2>
 <p>
     <%= blog.body %>
 </p>
-<small>By: <%= blog?.author %></small>
+<!-- <small>By: <%= blog?.author?.name %></small> -->
 <div class="Del-Ed">
 <a  href="/blog/<%= blog._id %>/Update"><Button class="Ed">EDIT</Button></a>
 <form class="Del" action="/blog/<%= blog._id %>?_method=DELETE" method="post">

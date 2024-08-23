@@ -65,7 +65,7 @@ module.exports = function (passport) {
       async (req, email, password, done) => {
         try {
         
-          const author = await Author.findOne({ email });
+          const author = await Author.findOne({ email } || {name:email});
           if (!author) {
             return done(null, false, req.flash("login message", "No user found"));
           }
