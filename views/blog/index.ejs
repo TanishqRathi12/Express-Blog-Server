@@ -5,7 +5,7 @@
 <% blogs.forEach(blog => { %>
   <article>
     <h3><a href="/blog/<%= blog._id %>">
-      <%= blog.title %>
+      <%= blog.title.substring(0,50) %>
     </a></h3>
     <p>
       <%= blog.body.substring(0, 100) %>...

@@ -7,7 +7,14 @@
         <label for="title">Title</label>
         <input required type="text" name="title" id="title" value="<%= blog.title %>">
         <label for="body">Body</label>
-        <textarea required type="text" name="body" id="body"><%= blog?.body %></textarea>
+        <textarea required type="text" name="body" id="body" placeholder="Cannot be empty...." oninput="autoResize(this)"><%= blog?.body %></textarea>
 
         <button type="submit">Update Blog</button>
     </form>
+
+    <script>
+        function autoResize(e){
+            e.style.height = 'auto';
+            e.style.height = e.scrollHeight + 'px'
+        }
+    </script>
