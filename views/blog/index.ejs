@@ -2,6 +2,10 @@
 
 
 <h2>All Blogs</h2>
+<div class="filter-button">
+  <a href="/blog?sort=Newest"><button>Newest</button></a>
+  <a href="/blog?sort=Oldest"><button>Oldest</button></a>
+</div>
 <% blogs.forEach(blog => { %>
   <article>
     <h3><a href="/blog/<%= blog._id %>">

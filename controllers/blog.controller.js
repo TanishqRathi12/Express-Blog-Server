@@ -1,8 +1,16 @@
 const Blog = require("../models/blog");
 
 const blogIndex = async (req, res) => {
+  const sort = req.query.sort || 'Oldest';
+  let criteria = {createdAt:1};
+
+
+  if(sort === 'Newest'){
+    criteria = {createdAt:-1};
+  }
   Blog.find({})
     .populate("author", "name")
+    .sort(criteria)
     .then((blogs) => {
       res.render("blog/index", { blogs });
     })
