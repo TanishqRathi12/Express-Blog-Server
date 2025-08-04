@@ -1,19 +1,59 @@
-<%- include('../layout/main', { title: 'Blogs', body: '' }) %>
+<%- include('../layout/main', { title: 'All Blogs', body: '' }) %>
 
+<div class="content-section">
+    <h2 class="heading-primary">All Blogs</h2>
+    
+    <div class="filter-controls">
+        <div class="filter-button">
+            <a href="/blog?sort=Newest" class="btn btn-secondary">
+                📅 Newest First
+            </a>
+        </div>
+        <div class="filter-button">
+            <a href="/blog?sort=Oldest" class="btn btn-secondary">
+                🕐 Oldest First
+            </a>
+        </div>
+    </div>
 
-<h2>All Blogs</h2>
-<div class="filter-button">
-  <a href="/blog?sort=Newest"><button>Newest</button></a>
-  <a href="/blog?sort=Oldest"><button>Oldest</button></a>
+    <% if (blogs && blogs.length > 0) { %>
+        <div class="content-grid">
+            <% blogs.forEach(blog => { %>
+                <article class="card">
+                    <h3 class="card-title">
+                        <a href="/blog/<%= blog._id %>">
+                            <%= blog.title.length > 60 ? blog.title.substring(0, 60) + '...' : blog.title %>
+                        </a>
+                    </h3>
+                    <div class="card-content">
+                        <p class="text-large mb-4">
+                            <%= blog.body.length > 150 ? blog.body.substring(0, 150) + '...' : blog.body %>
+                        </p>
+                        <small class="text-secondary">
+                            👤 By: <%= blog.author?.name || 'Anonymous' %>
+                        </small>
+                    </div>
+                    <div class="card-actions">
+                        <a href="/blog/<%= blog._id %>" class="btn btn-primary">
+                            📖 Read More
+                        </a>
+                    </div>
+                </article>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div class="text-center mt-8">
+            <div class="card max-w-lg" style="margin: 0 auto;">
+                <h3 class="card-title text-center">No Blogs Yet</h3>
+                <p class="card-content text-center">
+                    Be the first to share your thoughts! Create your first blog post to get started.
+                </p>
+                <div class="card-actions justify-center">
+                    <a href="/blog/new" class="btn btn-primary">
+                        ✍️ Create First Blog
+                    </a>
+                </div>
+            </div>
+        </div>
+    <% } %>
 </div>
-<% blogs.forEach(blog => { %>
-  <article>
-    <h3><a href="/blog/<%= blog._id %>">
-      <%= blog.title.substring(0,50) %>
-    </a></h3>
-    <p>
-      <%= blog.body.substring(0, 100) %>...
-    </p>
-    <small>By: <%= blog.author ? blog.author.name : 'Unknown' %></small>
-  </article>
-<% }) %>

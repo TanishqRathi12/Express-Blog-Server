@@ -1,25 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title  %></title>
+    <title>
+        <%= title %> - My Blogging Platform
+    </title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="icon" href="/images/favico.png" type="image/png">
+    <meta name="description" content="A modern blogging platform for sharing your thoughts and stories">
 </head>
+
 <body>
     <header>
-        <h1>My Blogging App</h1>
-        <nav>
-            <ul>
-                <li><a href="/blog">Home</a></li>
-                <li><a href="/blog/new">Create New Blog</a></li>
-                <li><form action="/logout" method="POST">
-                <button id="logout" type="submit" Logout>Logout</button>
-                </form></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <h1>My Blogging Platform</h1>
+            <nav>
+                <ul>
+                    <li><a href="/blog">Home</a></li>
+                    <li><a href="/blog/new">Create New Blog</a></li>
+                    <li>
+                        <form action="/logout" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-logout">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <%= body %>
+
+    <main class="container">
+        <%- body %>
+    </main>
+
+    <script>
+        // Auto-resize textarea function
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
+        // Form validation
+        function validateForm(form) {
+            const inputs = form.querySelectorAll('input[required], textarea[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                const errorMsg = input.parentNode.querySelector('.error-message');
+                if (errorMsg) errorMsg.remove();
+
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.classList.add('error');
+                    const error = document.createElement('div');
+                    error.className = 'error-message';
+                    error.textContent = `${input.labels[0]?.textContent || 'This field'} is required`;
+                    input.parentNode.appendChild(error);
+                } else {
+                    input.classList.remove('error');
+                }
+            });
+
+            return isValid;
+        }
+
+        // Add form validation to all forms
+        document.addEventListener('DOMContentLoaded', function () {
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    if (form.hasAttribute('data-validate') && !validateForm(form)) {
+                        e.preventDefault();
+                    }
+                });
+            });
+
+            // Auto-resize existing textareas
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                autoResize(textarea);
+            });
+        });
+    </script>
 </body>
+
 </html>

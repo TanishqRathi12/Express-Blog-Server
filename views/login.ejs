@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="/css/login.css">
-    <link rel="icon" href="/images/favico.png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="/css/login.css" />
+  <link rel="icon" href="/images/favico.png" type="image/png" />
 </head>
+
 <body>
-    <div class="login-container">
-        <h1>Login Page</h1>
-        <form action="/login" method="POST">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required placeholder="Email">
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required placeholder="Password">
-            </div>
-            <button type="submit" class="btn">Login</button>
-            <% if (locals.error_msg) { %>
-                <div class="error_msg">
-                    <%= error_msg %>
-                </div>
-            <% } %>
-        </form>
-        <div class="signup-link">
-            <p>Don't have an account?<a href="/signup">Sign Up</a></p>
-        </div>
+  <div class="login-container">
+    <h1>Login Page</h1>
+    <form id="loginForm" action="/login" method="POST">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required placeholder="Email" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required placeholder="Password" />
+      </div>
+      <button type="submit" class="btn">Login</button>
+      <button type="button" class="btn" id="guestLoginBtn">Login as Guest</button>
+
+      <% if (locals.error_msg) { %>
+        <div class="error_msg"><%= error_msg %></div>
+      <% } %>
+    </form>
+
+    <div class="signup-link">
+      <p>Don't have an account? <a href="/signup">Sign Up</a></p>
     </div>
+  </div>
+
+  <script>
+    document.getElementById('guestLoginBtn').addEventListener('click', function () {
+      document.getElementById('email').value = 'guest1@gmail.com';
+      document.getElementById('password').value = 'guest@12';
+      document.getElementById('loginForm').submit();
+    });
+  </script>
 </body>
 </html>

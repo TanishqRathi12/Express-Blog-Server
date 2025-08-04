@@ -1,19 +1,47 @@
-<%- include ('../layout/main', {title: 'Create Blog' , body:''})  %>
+<%- include('../layout/main', { title: 'Create New Blog', body: '' }) %>
 
+<div class="content-section">
+    <h2 class="heading-primary">Create New Blog</h2>
+    
+    <div class="form-container">
+        <form action="/blog" method="POST" data-validate>
+            <div class="form-group">
+                <label for="title" class="form-label">Blog Title *</label>
+                <input 
+                    type="text" 
+                    name="title" 
+                    id="title" 
+                    class="form-input"
+                    placeholder="Enter an engaging title for your blog..."
+                    required
+                    maxlength="100"
+                >
+            </div>
 
-<h2>Create a new blog</h2>
-<form action="/blog" method="post">
-    <label for="title">Title</label>
-    <input type="text" name="title" id="title">
-    <label for="body">Body</label>
-    <textarea type="text" name="body" id="text-body" placeholder="Type your blog content here..." oninput="autoResize(this)"></textarea>
+            <div class="form-group">
+                <label for="body" class="form-label">Blog Content *</label>
+                <textarea 
+                    name="body" 
+                    id="body" 
+                    class="form-textarea"
+                    placeholder="Share your thoughts, stories, and ideas here..."
+                    oninput="autoResize(this)"
+                    required
+                    minlength="10"
+                ></textarea>
+                <small class="text-tertiary">Minimum 10 characters required</small>
+            </div>
 
-    <button id="button" type="submit">Create new Blog</button>
-</form>
-
-<script>
-    function autoResize(e){
-        e.style.height = 'auto';
-        e.style.height = e.scrollHeight + 'px'
-    }
-</script>
+            <div class="form-group">
+                <div class="flex justify-between items-center">
+                    <a href="/blog" class="btn btn-secondary">
+                        ← Back to Blogs
+                    </a>
+                    <button type="submit" class="btn btn-success">
+                        📝 Publish Blog
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
